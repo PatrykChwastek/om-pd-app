@@ -1,0 +1,254 @@
+<style>
+    md-input-container {
+        margin: 15px;
+    }
+
+    md-card {
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="container" style="width: 60%">
+    <md-card style="background-color: #8e98b8">
+        <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Nowe Ogłoszenie</span></h2>
+        </md-toolbar>
+
+        <md-card-content>
+            <form ng-submit="submit()" name="offerForm" novalidate​>
+
+                <md-card style="padding-top: 14px">
+                    <md-input-container>
+                        <label style="text-size:50">Tytuł ogłoszenia:</label>
+                        <input ng-model="title"
+                               type="text" required
+                               id="title"
+                               name="title">
+                    </md-input-container>
+
+                    <div style="margin: 12px">
+                        <div class="form-grup">
+                            <label style="text-size:50">Opis:</label>
+                            <textarea type="text" required
+                                      class="form-control" ng-model="content"
+                                      id="content"
+                                      name="content"
+                                      rows="2">
+
+                </textarea>
+                        </div>
+                    </div>
+                </md-card>
+
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Dane Samochodu</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <dic layout="row">
+                        <md-input-container flex="50">
+                            <label>Cena:</label>
+                            <input ng-model="price"
+                                   type="number"
+                                   id="price" required
+                                   name="price">
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Skrzynia Biegów:</label>
+                            <md-select id="gearbox" ng-model="gearbox" ng-required="true">
+                                <md-option value="Manualna">
+                                    Manualna
+                                </md-option>
+                                <md-option value="Automatyczna">
+                                    Automatyczna
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </dic>
+                    <div layout="row">
+
+                        <md-input-container flex="50">
+                            <label>Marka:</label>
+                            <md-select id="marka" ng-model="brand" ng-change="brandSelect(brand)" required>
+                                <md-option ng-repeat="selBrand in allBrands" ng-value="selBrand.name">
+                                    {{selBrand.name}}
+                                </md-option>
+                                <md-option value="Inne">
+                                    Inne
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Model:</label>
+                            <md-select id="model" ng-model="model" ng-disabled="brandSelected" required>
+
+                                <md-option ng-repeat="selmodel in models" ng-value="selmodel">
+                                    {{selmodel}}
+                                </md-option>
+                                <md-option value="Inne">
+                                    Inne
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Typ nadwozia:</label >
+                            <md-select id="type" ng-model="type" required>
+                                <md-option value="SUV">
+                                    SUV
+                                </md-option>
+                                <md-option value="Coupe">
+                                    Coupe
+                                </md-option>
+                                <md-option value="Hatchback">
+                                    Hatchback
+                                </md-option>
+                                <md-option value="Kombi">
+                                    Kombi
+                                </md-option>
+                                <md-option value="Sedan">
+                                    Sedan
+                                </md-option>
+                                <md-option value="Minivan">
+                                    Minivan
+                                </md-option>
+                                <md-option value="Pick-Up">
+                                    Pick-Up
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Rodzaj Paliwa:</label>
+                            <md-select id="fuel" ng-model="fuel">
+                                <md-option value="Benzyna">
+                                    Benzyna
+                                </md-option>
+                                <md-option value="Benzyna+LPG">
+                                    Benzyna+LPG
+                                </md-option>
+                                <md-option value="Diesel">
+                                    Diesel
+                                </md-option>
+                                <md-option value="Hybryda">
+                                    Hybryda
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <hr>
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Rok Produkcji:</label>
+                            <input ng-model="production"
+                                   type="number" required
+                                   id="production"
+                                   name="production">
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Przebieg:</label>
+                            <input ng-model="mileage"
+                                   type="number" required
+                                   id="mileage"
+                                   name="mileage">
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row">
+
+
+                        <md-input-container flex="50">
+                            <label>Pojemność Silnika:</label>
+                            <input ng-model="capacity"
+                                   type="number" required
+                                   id="capacity"
+                                   name="capacity">
+                        </md-input-container>
+
+
+                        <md-input-container flex="50">
+                            <label>Moc Silnika:</label>
+                            <input ng-model="power"
+                                   type="number" required
+                                   id="power"
+                                   name="power">
+                        </md-input-container>
+                    </div>
+                </md-card>
+                <md-card>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Zdjęcia</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <div layout="row">
+                        <md-input-container flex="33">
+
+                            <input file-model="selectedUploadFile1"
+                                   aria-label="Photo1"
+                                   type="file" required
+                                   name="photo1"
+                                   accept="image/*">
+                        </md-input-container>
+
+                        <md-input-container flex="33">
+
+                            <input file-model="selectedUploadFile2"
+                                   aria-label="Photo2"
+                                   type="file"
+                                   name="photo2"
+                                   accept="image/*">
+                        </md-input-container>
+
+                        <md-input-container flex="33">
+
+                            <input file-model="selectedUploadFile3"
+                                   aria-label="Photo3"
+                                   type="file"
+                                   name="photo3"
+                                   accept="image/*">
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row">
+                        <md-input-container flex="33">
+
+                            <input file-model="selectedUploadFile4"
+                                   aria-label="Photo4"
+                                   type="file"
+                                   name="photo4"
+                                   accept="image/*">
+
+                        </md-input-container>
+
+                        <md-input-container flex="33">
+
+                            <input file-model="selectedUploadFile5"
+                                   aria-label="Photo5"
+                                   type="file"
+                                   name="photo5"
+                                   accept="image/*">
+                        </md-input-container>
+                        <div flex="33"></div>
+                    </div>
+                </md-card>
+
+                <input type="text" style="display: none"
+                       class="form-control" ng-model="owner"
+                       name="owner"
+                       id="owner">
+                <md-button class="md-raised md-primary" ng-click="setOwner()" type="submit">
+                    Stwórz
+                </md-button>
+
+                <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

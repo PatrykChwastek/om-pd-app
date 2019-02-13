@@ -1,0 +1,118 @@
+<style>
+    .buttonsCard .md-primary {
+        margin: 12px;
+    }
+
+
+
+
+
+
+</style>
+
+<div class="container" style="width: 85%">
+    <md-card style="background-color: #8e98b8">
+        <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Panel Administracyjny</span></h2>
+        </md-toolbar>
+
+        <md-card-content>
+            <div layout="column">
+                <div layout="row">
+                    <div flex="19">
+                        <md-card class="buttonsCard">
+                            <md-button class="md-raised md-primary" href="#!/users">
+                                Użytkownicy
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/admin-offers">
+                                Aktywne Ogłoszenia
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/admin-archives">
+                                Archiwum Ogłoszeń
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/admin-cars">
+                                Baza Samochodów
+                            </md-button>
+                        </md-card>
+                    </div>
+                    <div flex="85">
+                        <md-card>
+                            <md-card-content>
+                                <div layout="row">
+                                    <md-input-container flex="33">
+                                        <label>Marka:</label>
+                                        <md-select id="marka" ng-model="brand" ng-change="brandSelect(brand); modelSelected = false">
+                                            <md-option ng-repeat="selBrand in allBrands" ng-value="selBrand.name">
+                                                {{selBrand.name}}
+                                            </md-option>
+                                            <md-option value="Inne">
+                                                Inne
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+
+                                    <md-input-container flex="33">
+                                        <label style="text-size:50">Nowa marka samochodu:</label>
+                                        <input ng-model="nbrand"
+                                               type="text"
+                                               id="nbrand"
+                                               name="nbrand">
+                                    </md-input-container>
+                                    <div flex="33">
+                                        <md-button class="md-raised md-primary" ng-click="addBrand()">
+                                            Dodaj
+                                        </md-button>
+
+                                        <md-button class="md-fab md-mini md-warn" type="button" type="button"
+                                                   aria-label="1"
+                                                   ng-disabled="!brandSelected"
+                                                   ng-click="delBrand()">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                        <md-card>
+                            <md-card-content layout="row">
+                                <md-input-container flex="33">
+                                    <label>Model:</label>
+                                    <md-select id="model" ng-model="model"
+                                               ng-disabled="!brandSelected"
+                                               ng-change="modelSelected = true">
+                                        <md-option ng-repeat="selmodel in models" ng-value="selmodel">
+                                            {{selmodel}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+
+                                <md-input-container flex="34">
+                                <label >Nowy model samochodu:</label>
+                                <input ng-model="nmodel" ng-disabled="!brandSelected"
+                                       type="text"
+                                       id="nmodel"
+                                       name="nmodel">
+                                    </md-input-container>
+                                <div flex="33">
+                                    <md-button class="md-raised md-primary" ng-click="addModel()" ng-disabled="!brandSelected">
+                                        Dodaj
+                                    </md-button>
+
+                                    <md-button class="md-fab md-mini md-warn" type="button" type="button"
+                                               ng-disabled="!modelSelected"
+                                               aria-label="1"
+                                               ng-click="delModel()">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </md-button>
+                                </div>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>

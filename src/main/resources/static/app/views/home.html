@@ -1,0 +1,246 @@
+<style>
+    .offerBox {
+        margin: auto;
+        width: 70%;
+        background-color: #8e98b8;
+    }
+
+    .myimg {
+        width: 78%;
+        padding: 2px;
+        max-height: 261px;
+        float: right !important;
+
+    }
+
+    .paginBox {
+        display: inline-block;
+        padding: 7px;
+    }
+
+    .paginBox b {
+        position: relative;
+        z-index: 1;
+    }
+
+    #prewBtn {
+        margin: 1px;
+    }
+
+    .filterBtn {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        display: flex;
+        position: fixed;
+        margin-top: 60px;
+    }
+
+    .md-sidenav-left {
+        height: 80%;
+    }
+
+
+    h4 {
+        margin: 4px;
+    }
+
+    h3 {
+        color: #ce0000;
+        margin: 4px;
+    }
+
+</style>
+
+<div class="filterBtn">
+    <md-button class="md-fab md-primary" ng-click="toggleLeft()">
+        <span class="glyphicon glyphicon-filter"></span>
+    </md-button>
+</div>
+
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+
+    <md-toolbar class="md-theme-indigo md-toolbar-tools">
+        <md-button ng-click="toggleLeft()">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Wyszukiwanie
+        </md-button>
+    </md-toolbar>
+
+    <md-content>
+        <form ng-submit="submit()" name="filterForm" novalidate​>
+            <div layout="row" style="padding-left: 5px; padding-right: 5px">
+                <md-input-container flex="100">
+                    <label style="text-size:50">Tytuł ogłoszenia:</label>
+                    <input ng-model="title"
+                           type="text"
+                           id="title"
+                           name="title">
+                </md-input-container>
+            </div>
+
+
+            <div layout="row" style="padding: 4px">
+
+                <md-input-container flex="50">
+                    <label>Marka:</label>
+                    <md-select id="marka" ng-model="brand" ng-change="brandSelect(brand)">
+                        <md-option value="undefined">
+                            Wszystko
+                        </md-option>
+                        <md-option ng-repeat="selBrand in allBrands" ng-value="selBrand.name">
+                            {{selBrand.name}}
+                        </md-option>
+                        <md-option value="Inne">
+                            Inne
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Model:</label>
+                    <md-select id="model" ng-model="model" ng-disabled="brandSelected">
+                        <md-option value="undefined">
+                            Wszystko
+                        </md-option>
+                        <md-option ng-repeat="selmodel in models" ng-value="selmodel">
+                            {{selmodel}}
+                        </md-option>
+                        <md-option value="Inne">
+                            Inne
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row">
+                <md-input-container flex="50">
+                    <label>Typ nadwozia:</label>
+                    <md-select id="type" ng-model="type">
+                        <md-option value="undefined">
+                            Wszystko
+                        </md-option>
+                        <md-option value="SUV">
+                            SUV
+                        </md-option>
+                        <md-option value="Coupe">
+                            Coupe
+                        </md-option>
+                        <md-option value="Hatchback">
+                            Hatchback
+                        </md-option>
+                        <md-option value="Kombi">
+                            Kombi
+                        </md-option>
+                        <md-option value="Sedan">
+                            Sedan
+                        </md-option>
+                        <md-option value="Minivan">
+                            Minivan
+                        </md-option>
+                        <md-option value="Pick-Up">
+                            Pick-Up
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex="50">
+                    <label>Rodzaj Paliwa:</label>
+                    <md-select id="fuel" ng-model="fuel">
+                        <md-option value="undefined">
+                            Wszystko
+                        </md-option>
+                        <md-option value="Benzyna">
+                            Benzyna
+                        </md-option>
+                        <md-option value="Benzyna+LPG">
+                            Benzyna+LPG
+                        </md-option>
+                        <md-option value="Diesel">
+                            Diesel
+                        </md-option>
+                        <md-option value="Hybryda">
+                            Hybryda
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" type="submit" style="width: 53%">
+                    Szukaj
+                    <i class="glyphicon glyphicon-search"></i>
+                </md-button>
+            </div>
+        </form>
+    </md-content>
+
+</md-sidenav>
+
+<div class="container">
+    <md-card class="offerBox">
+        <div ng-repeat="offer in offers">
+
+            <md-card>
+                <div ng-click="" ui-sref="view-offer({id: offer.id})">
+                    <div layout="column">
+                        <div layout="row">
+                            <div flex="70">
+                                <md-card-title>
+                                    <md-card-title-text>
+                                        <span class="md-headline">{{offer.title}}</span>
+                                    </md-card-title-text>
+                                </md-card-title>
+                                <md-card-content>
+                                    <div style="margin-top: 12px" layout="row">
+                                        <h4 flex="33">Marka: {{offer.brand}}</h4>
+                                        <h4 flex="33">Model: {{offer.model}}</h4>
+                                        <h3 flex="33">Cena: {{offer.price}}</h3>
+                                    </div>
+                                    <div layout="row">
+                                        <h4 flex="33">Rok Produkcji: {{offer.production}}</h4>
+                                        <h4 flex="33">Przebieg: {{offer.mileage}}</h4>
+                                        <div flex="33"></div>
+                                    </div>
+                                </md-card-content>
+                            </div>
+                            <div flex="30">
+                                <img class="myimg" src="{{offer.photo1}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </md-card>
+
+        </div>
+
+
+        <div class="paginBox">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        <md-button class="md-fab md-mini md-primary" ng-click='previousPage()' id="prewBtn"
+                                   aria-label="1">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </md-button>
+                    </th>
+
+                    <th ng-repeat="button in pageButtons">
+                        <md-button type="button" class="md-fab md-mini md-primary" ng-click='goPage($event)'
+                                   aria-label="1"
+                                   id="pageBtn{{button.page}}">{{button.page+1}}
+                        </md-button>
+                    </th>
+
+                    <th>
+                        <md-button class="md-fab md-mini md-primary" ng-click='nextPage()' id="nextBtn" aria-label="1">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </md-button>
+                    </th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </md-card>
+</div>

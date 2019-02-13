@@ -1,0 +1,129 @@
+<style>
+    .regBox {
+        background-color: #8e98b8;
+        width: 45%;
+        margin: auto;
+
+    }
+
+    .form-group {
+        padding: 10px;
+        width: 100%;
+    }
+</style>
+
+
+<md-card class="regBox">
+
+    <md-toolbar>
+        <h2 class="md-toolbar-tools"><span>Rejestracja</span></h2>
+    </md-toolbar>
+
+    <div layout="row" style="padding-top: 5px">
+        <div class="col-md-12">
+            <form ng-submit="submit()" name="register" novalidate novalidate style="padding-bottom: 8px">
+                <div layout="row">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.name.$invalid && register.name.$dirty }">
+                        <label for="name">Imię:</label>
+                        <input type="text"
+                               class="form-control" ng-model="appUser.name" id="name"
+                               name="name">
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.lastname.$invalid && register.lastname.$dirty }">
+                        <label for="lastname">Nazwisko:</label>
+                        <input type="text"
+                               class="form-control" ng-model="appUser.lastname" id="lastname"
+                               name="lastname">
+                    </div>
+                </div>
+                <div layout="row">
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.password.$invalid && register.password.$dirty }">
+                        <label for="pwd">Hasło:</label>
+                        <input type="password"
+                               required class="form-control"
+                               id="pwd"
+                               ng-model="appUser.password"
+                               name="password">
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.confirmPassword.$invalid && register.confirmPassword.$dirty }">
+                        <label for="cpwd">Potwierdź Hasło:</label> <input type="password"
+                                                                          name="confirmPassword" required
+                                                                          class="form-control" id="cpwd"
+                                                                          ng-model="confirmPassword">
+                        <div class="alert alert-warning margin-top-5"
+                             ng-show="confirmPassword != appUser.password ">Hasła nie są identyczne
+                        </div>
+                    </div>
+                </div>
+                <div layout="row">
+
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.email.$invalid}">
+                        <label for="email">e-mail:</label>
+                        <input type="email"
+                               required class="form-control"
+                               ng-model="appUser.email"
+                               id="email"
+                               name="email">
+                    </div>
+
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.phone.$invalid}">
+                        <label for="phone">Numer Telefonu:</label>
+                        <input type="text"
+                               ng-pattern="/^[0-9]{9,10}$/"
+                               class="form-control"
+                               ng-model="appUser.phone"
+                               id="phone"
+                               name="phone">
+                    </div>
+                </div>
+                <div layout="row">
+
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.username.$invalid && register.username.$dirty }">
+                        <label for="username">Nazwa Użytkownika:</label>
+                        <input type="text"
+                               required class="form-control"
+                               ng-model="appUser.username"
+                               id="username"
+                               name="username">
+                    </div>
+
+
+                    <div class="form-group"
+                         ng-class="{ 'has-error': register.locality.$invalid}">
+                        <label for="locality">Miejscowość:</label>
+                        <input type="text"
+                               required class="form-control"
+                               ng-model="appUser.locality"
+                               id="locality"
+                               name="locality">
+                    </div>
+                </div>
+
+                <div layout="row">
+                <md-checkbox aria-label="Checkbox" required class="md-primary" ng-model="agreement" id="agreement" name="agreement" >
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych
+                </md-checkbox>
+                </div>
+                <md-button type="submit" class="md-raised md-primary"
+                           ng-disabled="register.$invalid || (confirmPassword != appUser.password||!agreement)">Zarejestruj
+                </md-button>
+
+                <div class="alert alert-info margin-top-5"
+                     ng-show="message">{{message}}</div>
+            </form>
+        </div>
+    </div>
+</md-card>
+</div>
+</div>
+</div>
+</md-card-content>

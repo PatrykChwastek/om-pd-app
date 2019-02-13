@@ -1,0 +1,38 @@
+<style>
+    .mCards {
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-top: 16px;
+    }
+
+</style>
+
+<div class=" col-md-4 col-md-offset-4">
+    <md-card style="background-color: #8e98b8">
+        <md-toolbar>
+        <h2 class="md-toolbar-tools"><span>Logowanie</span></h2>
+    </md-toolbar>
+
+        <md-card-content>
+            <form ng-submit="login()">
+
+                <div class="form-group mCards">
+                    <label  for="username">Nazwa Użytkownika:</label> <input type="txt"
+                                                                             class="form-control"
+                                                                             ng-model="username"
+                                                                             id="username">
+
+                </div>
+                <div class="form-group mCards">
+                    <label for="pwd">Hasło:</label>
+                    <input type="password" class="form-control" id="pwd" ng-model="password">
+                </div>
+                <md-button class="md-raised md-primary" type="submit">Zaloguj</md-button>
+
+                <md-button class="md-raised md-primary" ui-sref="register">Rejestracja</md-button>
+
+                <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+            </form>
+        </md-card-content>
+    </md-card>
+</div>

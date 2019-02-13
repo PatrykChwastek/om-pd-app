@@ -1,0 +1,177 @@
+<style>
+
+    .offerView {
+        width: 82%;
+    }
+
+    .mainImg {
+        width: 90%;
+        padding: 2px;
+    }
+
+    .imageBox {
+        width: 99%;
+        padding: 2px;
+    }
+
+    .imgBox {
+        max-height: 500px;
+    }
+
+    h4 {
+        margin-left: 15px;
+    }
+
+    .gray {
+        color: #797979;
+    }
+
+    md-dialog {
+        max-width: 95%!important;
+        max-height: 95%!important;
+    }
+</style>
+
+<div class="container offerView">
+    <md-card style="background-color: #8e98b8">
+        <md-toolbar>
+            <h1 class="md-toolbar-tools"><span>{{offer.title}}</span></h1>
+        </md-toolbar>
+
+        <md-card-content>
+
+            <div layout="row">
+                <md-card layout="row" flex="70">
+
+                    <div flex="85">
+                        <md-button ng-click="showPhoto1($event)">
+                            <img class="mainImg" src="{{offer.photo1}}">
+                        </md-button>
+                    </div>
+                    <div flex="20">
+                        <md-button ng-click="showPhoto2($event)" ng-show="offer.photo2 != 'brak'">
+                            <img class="imageBox" src="{{offer.photo2}}">
+                        </md-button>
+                        <md-button ng-click="showPhoto3($event)" ng-show="offer.photo3 != 'brak'">
+                            <img class="imageBox" src="{{offer.photo3}}">
+                        </md-button>
+                        <md-button ng-click="showPhoto4($event)" ng-show="offer.photo4 != 'brak'">
+                            <img  class="imageBox" src="{{offer.photo4}}">
+                        </md-button>
+                        <md-button ng-click="showPhoto5($event)"ng-show="offer.photo5 != 'brak'">
+                            <img  class="imageBox" src="{{offer.photo5}}">
+                        </md-button>
+                    </div>
+
+                </md-card>
+                <div flex="30">
+                    <md-card>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td><h2 style="color: #e22300;margin-left: 15px;">Cena:</h2></td>
+                                <td><h2 style="color: #e22300;margin-left: 15px;">{{offer.price}}zł</h2></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Marka: </h4></td>
+                                <td><h4>{{offer.brand}}</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Model: </h4></td>
+                                <td><h4>{{offer.model}}</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Typ Nadwozia: </h4></td>
+                                <td><h4>{{offer.type}}</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Rok Produkcji: </h4></td>
+                                <td><h4>{{offer.production}}</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Przebieg: </h4></td>
+                                <td><h4>{{offer.mileage}}km</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Pojemność: </h4></td>
+                                <td><h4>{{offer.capacity}}cm3</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Moc Silnika: </h4></td>
+                                <td><h4>{{offer.power}}KM</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Rodzaj Paliwa: </h4></td>
+                                <td><h4>{{offer.fuel}}</h4></td>
+                            </tr>
+                            <tr>
+                                <td><h4 class="gray">Skrzynia Biegów: </h4></td>
+                                <td><h4>{{offer.gearbox}}</h4></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-card>
+                </div>
+            </div>
+            <md-card>
+                <md-card-content>
+                    <div layout="row">
+                        <p class="gray" style="margin: 2px">Data Utworzenia Ogłoszenia: {{offer.date| date
+                            :'MM.dd.yyyy'}}</p>
+                    </div>
+                    <div layout="row">
+                        <h4 ng-show="!owner.show_fullname" style="margin-right: 45px">Utworzono Przez:
+                            {{offer.owner}}</h4>
+                        <h4 ng-show="owner.show_fullname" style="margin-right: 45px">Utworzono Przez: {{owner.name}}
+                            {{owner.lastname}}</h4>
+                        <h4 ng-show="owner.show_email"> Kontakt: {{owner.email}} </h4><h4 ng-show="owner.show_phone">
+                        Numer telefonu: {{owner.phone}}</h4>
+                    </div>
+                    <div layout="row">
+                        <h4 style="color: #e22300"><b>Lokalizacja: {{owner.locality}}</b></h4>
+                    </div>
+                </md-card-content>
+            </md-card>
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Opis:</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    {{offer.content}}
+                </md-card-content>
+            </md-card>
+        </md-card-content>
+    </md-card>
+</div>
+
+<script type="text/ng-template" id="dialog1.tmpl.html">
+    <md-dialog
+            aria-label="photoDialog">
+        <div layout="row">
+            <span flex></span>
+            <md-button class="md-button" ng-click="cancel()">
+                Zamknij
+            </md-button>
+        </div>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div layout="row">
+                    <md-button flex="1" ng-click="prewPhoto()">
+                        <
+                    </md-button>
+                    <div flex="98">
+                        <img src="{{mPhoto}}"/>
+                    </div>
+                    <md-button flex="1" ng-click="nextPhoto()">
+                        >
+                    </md-button>
+
+                </div>
+            </div>
+        </md-dialog-content>
+    </md-dialog>
+</script>

@@ -1,0 +1,183 @@
+<style>
+
+    /*--------------DO Nawigacji------------------*/
+
+    .navbar-default {
+        background-color: #8e98b8;
+        border-color: #8e98b8;
+    }
+
+    .navbar-default .navbar-brand {
+        color: #292929;
+    }
+
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-brand:focus {
+        color: #365fe2;
+    }
+
+    .navbar-default .navbar-text {
+        color: #ffffff;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #221010;
+    }
+
+    .navbar-default .navbar-nav > li > a:hover,
+    .navbar-default .navbar-nav > li > a:focus {
+        color: #365fe2;
+    }
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        color: #365fe2;
+        background-color: #8e98b8;
+    }
+
+    .navbar-default .navbar-nav > .open > a,
+    .navbar-default .navbar-nav > .open > a:hover,
+    .navbar-default .navbar-nav > .open > a:focus {
+        color: #365fe2;
+        background-color: #8e98b8;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: #8e98b8;
+    }
+
+    .navbar-default .navbar-toggle:hover,
+    .navbar-default .navbar-toggle:focus {
+        background-color: #8e98b8;
+    }
+
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #221010;
+    }
+
+    .navbar-default .navbar-collapse,
+    .navbar-default .navbar-form {
+        border-color: #221010;
+    }
+
+    .navbar-default .navbar-link {
+        color: #221010;
+    }
+
+    .navbar-default .navbar-link:hover {
+        color: #365fe2;
+    }
+
+    .navbar-default {
+        box-shadow: 0 2px 1px -1px #484848;
+        margin-right: 4px;
+        margin-left: 4px;
+        padding-top: 3px;
+        border-radius: 4px !important;
+    }
+
+    @media (max-width: 767px) {
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+            color: #221010;
+        }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #365fe2;
+        }
+
+        .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+        .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+        .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+            color: #365fe2;
+            background-color: #8e98b8;
+        }
+    }
+
+    /*-----------------CSS------------------*/
+    .user {
+        font-weight: bold;
+    }
+
+    .logout {
+        cursor: pointer;
+        margin-left: 2px;
+    }
+
+    .marginNav {
+        margin-left: 20px;
+        margin-right: 35px;
+    }
+</style>
+
+<nav class="navbar navbar-default ">
+    <div class="marginNav">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#navbar"
+                    aria-expanded="false"
+                    aria-controls="navbar">
+
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home"><b>Ogłoszenia Motoryzacyjne</b></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+                <li ng-show="isAdmin"><a style="padding: 0px" href="#!/admin-offers">
+                    <md-button class="md-raised md-primary">
+                        Panel Administracyjny
+                    </md-button>
+                </a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a style="padding: 0px" href="#!/new-offer">
+                    <md-button class="md-fab md-mini md-primary">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </md-button>
+                </a>
+                </li>
+                <li>
+                    <a style="padding: 0px" href="#!/login">
+                        <md-button class="md-raised md-primary">
+                            Zaloguj
+                            <span class="glyphicon glyphicon-login"></span>
+                        </md-button>
+                    </a>
+                </li>
+                <li ng-show="user.username">
+                    <a data-toggle="dropdown">
+                        <span class="user">Witam:  {{user.name}}</span>
+                        <span style="padding-left: 1px" class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a href="#!/user-panel">
+                                Panel Użytkownika
+                            </a></li>
+                            <li><a href="#!/new-offer">
+                                Nowe Ogłoszenie</a></li>
+                            <li class="divider"></li>
+                            <li><a>
+                                <span class="glyphicon glyphicon-log-out"></span>
+                                <span ng-click="logout()" href="" class="logout">Wyloguj</span>
+                            </a></li>
+                        </ul>
+                </li>
+
+
+                <li ng-show="!user.username"><a ui-sref="register" style="padding: 0px">
+                    <md-button>Rejestracja</md-button>
+                </a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>

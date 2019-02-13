@@ -1,0 +1,105 @@
+<style>
+    .buttonsCard .md-primary {
+        margin: 12px;
+    }
+
+
+
+</style>
+
+<div class="container" style="width: 85%">
+    <md-card style="background-color: #8e98b8">
+        <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Panel Administracyjny</span></h2>
+        </md-toolbar>
+
+        <md-card-content>
+            <div layout="column">
+                <div layout="row">
+                    <div flex="19">
+                        <md-card class="buttonsCard">
+                            <md-button class="md-raised md-primary" href="#!/users">
+                               Użytkownicy
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/admin-offers">
+                                Aktywne Ogłoszenia
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/admin-archives">
+                                Archiwum Ogłoszeń
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/admin-cars">
+                                Baza Samochodów
+                            </md-button>
+                        </md-card>
+                    </div>
+                    <div flex="85">
+                        <md-card>
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tytuł Ogłoszenia</th>
+                                    <th>Samochód</th>
+                                    <th>Data Utworzenia</th>
+                                    <th>Data Archiwizacji</th>
+                                    <th>Użytkownik</th>
+                                    <th></th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="offer in offers">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{offer.title}}</td>
+                                    <td>{{offer.brand}} {{offer.model}}</td>
+                                    <td>{{offer.date| date:'MM/dd/yyyy'}}</td>
+                                    <td>{{offer.archiveDate| date:'MM/dd/yyyy'}}</td>
+                                    <td>{{offer.owner}}</td>
+
+                                    <td><md-button class="md-fab md-mini md-primary" type="button" aria-label="1"
+                                                ng-href="#!/view-archive-offer/{{offer.id}}">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </md-button>
+
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="paginBox" >
+
+                                <table >
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            <md-button class="md-fab md-mini md-primary" ng-click='previousPage()' id="prewBtn" aria-label="1">
+                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                            </md-button>
+                                        </th>
+
+                                        <th ng-repeat="button in pageButtons">
+                                            <md-button class="md-fab md-mini md-primary" ng-click='goPage($event)' aria-label="1"
+                                                       id="pageBtn{{button.page}}">{{button.page+1}}
+                                            </md-button>
+                                        </th>
+
+                                        <th>
+                                            <md-button class="md-fab md-mini md-primary" ng-click='nextPage()' id="nextBtn" aria-label="1">
+                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                            </md-button>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>

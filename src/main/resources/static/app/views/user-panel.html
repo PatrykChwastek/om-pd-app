@@ -1,0 +1,176 @@
+<style>
+    .buttonsCard .md-primary {
+        margin: 12px;
+    }
+
+    .userPanelCard {
+        background-color: #8e98b8;
+        margin: auto;
+    }
+
+    .form-group{
+        padding: 10px;
+        width: 35%;
+    }
+</style>
+
+<div class="container" style="width: 85%">
+    <md-card class="userPanelCard">
+        <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Panel Użytkownika</span></h2>
+        </md-toolbar>
+
+        <md-card-content>
+            <div layout="column">
+                <div layout="row">
+                    <div flex="19">
+                        <md-card class="buttonsCard">
+                            <md-button class="md-raised md-primary" href="#!/user-panel">
+                                Dane Użytkownika
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/user-offers">
+                                Moje Ogłoszenia
+                            </md-button>
+
+                            <md-button class="md-raised md-primary" href="#!/user-archives">
+                                Archiwum Ogłoszeń
+                            </md-button>
+
+
+                            <md-button class="md-raised md-warn" ng-click='delUser()'>
+                                USUŃ KONTO
+                            </md-button>
+
+                        </md-card>
+                    </div>
+                    <div flex="85">
+
+                        <md-card>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Ustawienia</span>
+                                    <span class="md-subhead">Wybierz które dane mają być wyświetlane w twoich ogłoszeniach </span>
+                                </md-card-title-text>
+                            </md-card-title>
+
+                            <form ng-submit="submitOptions()" name="optionsForm" style="margin-left: 5px; padding: 8px;">
+                                <md-switch class="md-primary" aria-label="" ng-model="appUser.show_fullname">
+                                    Imię i Nazwisko
+                                </md-switch>
+
+                                <md-switch class="md-primary" ng-change="emailFunc()" aria-label=""
+                                           ng-model="appUser.show_phone">
+                                    Numer Telefonu
+                                </md-switch>
+
+                                <md-switch class="md-primary" ng-change="emailFunc()" aria-label=""
+                                           ng-model="appUser.show_email">
+                                    e-mail
+                                </md-switch>
+
+                                <md-button type="submit" class="md-raised md-primary">
+                                    Zatwierdź
+                                </md-button>
+
+                                <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
+                            </form>
+
+                        </md-card>
+                        <md-card>
+                            <md-card-title>
+                                <md-card-title-text>
+                                    <span class="md-headline">Dane Użytkownika</span>
+                                </md-card-title-text>
+                            </md-card-title>
+
+                            <div layout="row" style="padding-top: 5px">
+                                <div class="col-md-12">
+                                    <form ng-submit="submit()" name="userForm" novalidate style="padding-bottom: 8px">
+                                        <div layout="row">
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': userForm.name.$invalid && userForm.name.$dirty }">
+                                                <label for="name">Imię:</label>
+                                                <input type="text" required
+                                                       class="form-control" ng-model="appUser.name" id="name"
+                                                       name="name">
+                                            </div>
+
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': userForm.lastname.$invalid && userForm.lastname.$dirty }">
+                                                <label for="lastname">Nazwisko:</label>
+                                                <input type="text" required
+                                                       class="form-control" ng-model="appUser.lastname" id="lastname"
+                                                       name="lastname">
+                                            </div>
+                                        </div>
+                                        <div layout="row">
+
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': userForm.username.$invalid && userForm.username.$dirty }">
+                                                <label for="username">Nazwa Użytkownika:</label>
+                                                <input type="text"
+                                                       required class="form-control"
+                                                       ng-model="appUser.username"
+                                                       id="username"
+                                                       name="username">
+                                            </div>
+
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': userForm.password.$invalid && userForm.password.$dirty }">
+                                                <label for="pwd">Hasło:</label>
+                                                <input type="password"
+                                                       required class="form-control"
+                                                       id="pwd"
+                                                       ng-model="appUser.password"
+                                                       name="password">
+                                            </div>
+                                        </div>
+                                        <div layout="row">
+
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': userForm.email.$invalid}">
+                                                <label for="email">e-mail:</label>
+                                                <input type="email"
+                                                       required class="form-control"
+                                                       ng-model="appUser.email"
+                                                       id="email"
+                                                       name="email">
+                                            </div>
+
+                                            <div class="form-group"
+                                                 ng-class="{ 'has-error': userForm.phone.$invalid}">
+                                                <label for="phone">Numer Telefonu:</label>
+                                                <input type="text"
+                                                       ng-pattern="/^[0-9]{9,10}$/"
+                                                       required class="form-control"
+                                                       ng-model="appUser.phone"
+                                                       id="phone"
+                                                       name="phone">
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                             ng-class="{ 'has-error': userForm.locality.$invalid}">
+                                            <label for="locality">Miejscowość:</label>
+                                            <input type="text"
+                                                   required class="form-control"
+                                                   ng-model="appUser.locality"
+                                                   id="locality"
+                                                   name="locality">
+                                        </div>
+                                        <md-button type="submit" class="md-raised md-primary"
+                                                   ng-disabled="userForm.$invalid">Zatwierdź
+                                        </md-button>
+
+                                        <div class="alert alert-info margin-top-5"
+                                             ng-show="message">{{message}}</div>
+                                    </form>
+                                </div>
+                            </div>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
