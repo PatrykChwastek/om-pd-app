@@ -243,10 +243,15 @@
                        class="form-control" ng-model="owner"
                        name="owner"
                        id="owner">
-                <md-button class="md-raised md-primary" ng-click="setOwner()" type="submit">
-                    Stwórz
-                </md-button>
+                <div layout="row">
 
+                        <md-button class="md-raised md-primary" ng-disabled="showSpinner" ng-click="setOwner()" type="submit">
+                            Stwórz
+                        </md-button>
+
+                    <md-progress-circular ng-if="showSpinner" md-mode="Indeterminate" ></md-progress-circular>
+
+                </div>
                 <div class="alert alert-info margin-top-5" ng-show="message">{{message}}</div>
             </form>
         </md-card-content>

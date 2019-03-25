@@ -1,6 +1,6 @@
 angular.module('myApp')
 .controller('OfferController', function($http, $scope,$mdDialog,$state, AuthService) {
-
+  $scope.showSpinner = false;
     var userName="";
     $scope.allBrands=[];
     $scope.brandSelected=false;
@@ -59,6 +59,7 @@ $scope.getBrands = function(){
         payload.append('photo3', $scope.selectedUploadFile3);
         payload.append('photo4', $scope.selectedUploadFile4);
         payload.append('photo5', $scope.selectedUploadFile5);
+  $scope.showSpinner = true;
 
         return $http({
             url: 'newoffer',
@@ -79,6 +80,7 @@ $scope.getBrands = function(){
             );
             $state.go('user-panel');
         }, function (error) {
+              $scope.showSpinner = false;
             $mdDialog.show(
                 $mdDialog.alert()
                     .clickOutsideToClose(true)

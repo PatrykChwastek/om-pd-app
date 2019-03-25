@@ -68,7 +68,7 @@ public class OfferRestController {
         return resultPage;
     }
 
-    @RequestMapping(//---------------------------------------------Działa usunąć z secur config!!----------------
+    @RequestMapping(
             value = "/user/offers",
             params = { "page", "size","owner" },
             method = RequestMethod.GET
@@ -80,7 +80,7 @@ public class OfferRestController {
         return resultPage;
     }
 
-    @RequestMapping(//---------------------------------------------Działa usunąć z secur config!!----------------
+    @RequestMapping(
             value = "/user/offers",
             params = { "page", "size","owner","title" },
             method = RequestMethod.GET
@@ -197,7 +197,7 @@ public class OfferRestController {
             bufferedOutputStream.write(bytes);
             bufferedOutputStream.close();
         } catch (IOException ex) {
-            System.out.println("================================() Upload Error");
+            System.out.println("=======() Upload Error");
         }
         return newName;
     }
